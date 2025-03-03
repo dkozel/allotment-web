@@ -1,0 +1,21 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:database.db"
+}
+
+generator db {
+  provider  = "prisma-client-py"
+  interface = "sync"
+}
+
+model Measurement {
+  id        Int      @id @default(autoincrement())
+  device_id String
+  time      DateTime @unique @default(now())
+  temp      Float?
+  temp_ext  Float?
+  humidity  Float?
+  battery_v Float?
+  rssi      Float?
+  snr       Float? 
+}

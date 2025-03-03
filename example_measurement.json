@@ -1,0 +1,81 @@
+{
+    "end_device_ids": {
+      "device_id": "allotment-shed",
+      "application_ids": {
+        "application_id": "allotment-sensors"
+      },
+      "dev_eui": "A840410000000000",
+      "join_eui": "A840410000000100",
+      "dev_addr": "260B2962"
+    },
+    "correlation_ids": [
+      "gs:uplink:01JNER3TZAJ9AWA11HC2X41NMW"
+    ],
+    "received_at": "2025-03-03T19:35:50.710777504Z",
+    "uplink_message": {
+      "session_key_id": "AZVdgbSSDmUaGFS/FoSJ9Q==",
+      "f_port": 2,
+      "frm_payload": "y9IH+wGvAQczf/8=",
+      "decoded_payload": {
+        "BatV": 3.026,
+        "Bat_status": 3,
+        "Ext_sensor": "Temperature Sensor",
+        "Hum_SHT": 43.1,
+        "TempC_DS": 18.43,
+        "TempC_SHT": 20.43
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "296161-gateway",
+            "eui": "C0EE40FFFF296161"
+          },
+          "time": "2025-03-03T19:35:50.495699882Z",
+          "timestamp": 2788344348,
+          "rssi": -121,
+          "channel_rssi": -121,
+          "snr": -13.75,
+          "location": {
+            "latitude": 51.531197,
+            "longitude": -3.21995,
+            "altitude": 82,
+            "source": "SOURCE_REGISTRY"
+          },
+          "uplink_token": "ChwKGgoOMjk2MTYxLWdhdGV3YXkSCMDuQP//KWFhEJyEy7EKGgwIlomYvgYQrP/R8QEg4PqYspO8Bw==",
+          "received_at": "2025-03-03T19:35:50.495979450Z"
+        }
+      ],
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 12,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "868500000",
+        "timestamp": 2788344348,
+        "time": "2025-03-03T19:35:50.495699882Z"
+      },
+      "received_at": "2025-03-03T19:35:50.507803847Z",
+      "confirmed": true,
+      "consumed_airtime": "1.482752s",
+      "locations": {
+        "user": {
+          "latitude": 51.5180064,
+          "longitude": -3.24884,
+          "altitude": 25,
+          "source": "SOURCE_REGISTRY"
+        }
+      },
+      "network_ids": {
+        "net_id": "000013",
+        "ns_id": "EC656E0000000181",
+        "tenant_id": "ttn",
+        "cluster_id": "eu1",
+        "cluster_address": "eu1.cloud.thethings.network"
+      }
+    }
+  }
+  
+  
