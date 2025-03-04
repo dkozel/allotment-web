@@ -8,14 +8,22 @@ generator db {
   interface = "sync"
 }
 
+model Device {
+  id        Int      @id @default(autoincrement())
+  deviceID  String   @unique
+  devEui    String?
+  measurements Measurement[]
+}
+
 model Measurement {
   id        Int      @id @default(autoincrement())
-  device_id String
-  time      DateTime @unique @default(now())
-  temp      Float?
-  temp_ext  Float?
+  device    Device   @relation(fields: [deviceId], references: [deviceID])
+  deviceId  String
+  time      DateTime @unique
+  tempC     Float?
+  tempCExt  Float?
   humidity  Float?
-  battery_v Float?
-  rssi      Float?
-  snr       Float? 
+  batteryV  Float?
+  rssidB    Float?
+  snrdB     Float?
 }
