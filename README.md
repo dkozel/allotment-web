@@ -30,12 +30,14 @@ A React application retrieves and renders the data into plots, creating the dash
 
 # Setup
 
+A virtual environment keeps dependencies managed and lets us use a specific Python version. The actual version doesn't matter, just keeping my environments consistent.
 ```
-python -m venv venv
+python3.12 -m venv venv
 source ./venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
+NodeJS was too out of date on my server to work with Prisma so `nodeenv` lets us fetch a newer version into the virtual environment. It modifies the environment so reload it.
 ```
 python -m pip install nodeenv
 nodenv -p
@@ -43,7 +45,38 @@ deactivate
 source ./venv/bin/activate
 ```
 
+Prisma needs to generate a some files based on the schema before first use, then the app can be launched.
 ```
 python -m prisma generate --schema prisma.schema
-python -m flask --app app run --host nexus.derekkozel.com
+python -m flask --app app run --host 127.0.0.1 --port 8080
+```
+
+### Running in "production"
+
+[Nginx](https://nginx.org/) is to provide a TLS layer and proxy to gunicorn as the WSGI server. Configuration file: [`allotment.derekozel.com`](backend/allotment.derekkozel.com).
+
+```
+sudo cp backend/allotment-web.site /etc/nginx/sites-available/
+sudo ln -s /etc/nginx/sites-available/allotment-web.site /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+[Certbot](https://certbot.eff.org/pages/about) is used to obtain and renew the TLS certificates. Install as per EFF's [guide](https://certbot.eff.org/instructions). Here's some helpful commands to check the status, setup the certbot to work alongside the Nginx server, and check renewals work.
+
+```
+sudo certbot certificates
+sudo certbot certonly --webroot -w /var/www/certbot -d nexus.derekkozel.com
+sudo systemctl list-timers
+sudo certbot renew --dry-run
+```
+
+A systemd service is used to run the [gunicorn](https://gunicorn.org/) server. Configuration file: [`allotment-web.service`](backend/allotment-web.service)
+
+```
+sudo cp backend/allotment-web.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable allotment-web
+sudo systemctl start allotment-web
+sudo journalctl -u allotment-web -f
 ```
