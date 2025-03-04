@@ -27,3 +27,23 @@ Prisma is used to manage the storing and retrieving of measurements in a SQLite 
 ## Viewing the Data
 
 A React application retrieves and renders the data into plots, creating the dashboard.
+
+# Setup
+
+```
+python -m venv venv
+source ./venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+```
+python -m pip install nodeenv
+nodenv -p
+deactivate
+source ./venv/bin/activate
+```
+
+```
+python -m prisma generate --schema prisma.schema
+python -m flask --app app run --host nexus.derekkozel.com
+```
