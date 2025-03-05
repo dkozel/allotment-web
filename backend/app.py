@@ -12,6 +12,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
+init_basic_auth(app)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})  # Allow frontend requests
 
 # ✅ Initialize Prisma but don't connect yet
